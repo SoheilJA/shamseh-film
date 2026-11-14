@@ -96,11 +96,13 @@ export function initMobileMenu() {
     openBtn?.setAttribute("aria-expanded", String(state));
     document.documentElement.style.overflow = state ? "hidden" : "";
     // simple, reliable transitions (no gsap dependency here)
+    // NOTE: Tailwind v4's translate-x-full uses the CSS `translate` property,
+    // so we must animate `translate`, not `transform`, to actually slide in.
     if (state) {
-      panel.style.transition = "transform .55s cubic-bezier(.16,1,.3,1)";
+      panel.style.transition = "translate .55s cubic-bezier(.16,1,.3,1)";
       veil.style.transition = "opacity .4s ease";
       requestAnimationFrame(() => {
-        panel.style.transform = "translateX(0)";
+        panel.style.translate = "0 0";
         veil.style.opacity = "1";
         items.forEach((it, i) => {
           it.style.transition = `opacity .5s ease ${0.15 + i * 0.07}s, transform .5s ease ${0.15 + i * 0.07}s`;
@@ -109,7 +111,7 @@ export function initMobileMenu() {
         });
       });
     } else {
-      panel.style.transform = "translateX(100%)";
+      panel.style.translate = "100% 0";
       veil.style.opacity = "0";
       items.forEach((it) => {
         it.style.opacity = "0";
