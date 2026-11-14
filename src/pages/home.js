@@ -131,30 +131,25 @@ export default async function homePage(app) {
         </div>
         <div data-section-rule class="h-px w-full bg-line mb-12 md:mb-16"></div>
 
-        <!-- featured large + editorial grid -->
-        <div class="grid gap-5 md:gap-6 lg:grid-cols-12">
+        <div class="grid gap-5 md:gap-6 lg:grid-cols-12 lg:items-start">
           <div class="lg:col-span-7">
             ${productionCard(featured[0], { variant: "landscape", index: 0, ratio: "16/10" })}
           </div>
-          <div class="lg:col-span-5 grid gap-5 md:gap-6">
+          <div class="grid grid-cols-2 gap-5 md:gap-6 lg:col-span-5">
             ${productionCard(featured[1], { variant: "portrait", index: 1, ratio: "4/5" })}
             ${productionCard(featured[2], { variant: "portrait", index: 2, ratio: "4/5" })}
           </div>
-          <div class="lg:col-span-4">
-            ${productionCard(featured[3], { variant: "portrait", index: 3, ratio: "3/4" })}
-          </div>
-          <div class="lg:col-span-4">
-            ${productionCard(featured[4], { variant: "portrait", index: 4, ratio: "3/4" })}
-          </div>
-          <div class="lg:col-span-4">
-            ${productionCard(featured[5], { variant: "portrait", index: 5, ratio: "3/4" })}
-          </div>
-          <div class="lg:col-span-6">
-            ${productionCard(featured[6], { variant: "landscape", index: 6, ratio: "16/10" })}
-          </div>
-          <div class="lg:col-span-6">
-            ${productionCard(featured[7], { variant: "landscape", index: 7, ratio: "16/10" })}
-          </div>
+        </div>
+
+        <div class="mt-5 md:mt-6 grid gap-5 md:gap-6 sm:grid-cols-2 lg:mt-8 lg:grid-cols-3">
+          ${productionCard(featured[3], { variant: "portrait", index: 3, ratio: "3/4" })}
+          ${productionCard(featured[4], { variant: "portrait", index: 4, ratio: "3/4" })}
+          ${productionCard(featured[5], { variant: "portrait", index: 5, ratio: "3/4" })}
+        </div>
+
+        <div class="mt-5 md:mt-6 grid gap-5 md:gap-6 sm:grid-cols-2 lg:mt-8">
+          ${productionCard(featured[6], { variant: "landscape", index: 6, ratio: "16/10" })}
+          ${productionCard(featured[7], { variant: "landscape", index: 7, ratio: "16/10" })}
         </div>
 
         <div class="mt-10 md:mt-14 text-center">
