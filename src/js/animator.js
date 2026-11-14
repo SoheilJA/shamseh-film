@@ -52,10 +52,16 @@ export function startScroll() {
   document.documentElement.style.overflow = "";
 }
 
-/** kill page-scoped triggers when leaving a route */
+/** kill page-scoped triggers when leaving a route (keeps custom cursor alive) */
 export function cleanupPage() {
   ScrollTrigger.getAll().forEach((t) => t.kill());
-  gsap.killTweensOf("*");
+  gsap.globalTimeline.getChildren(false, true, true).forEach((t) => {
+    const targets = t.targets ? t.targets() : [];
+    const isCursor = targets.some(
+      (n) => n.classList?.contains("cursor-dot") || n.classList?.contains("cursor-ring")
+    );
+    if (!isCursor) t.kill();
+  });
 }
 
 /* ---------- reveal vocabulary ---------- */
