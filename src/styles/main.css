@@ -1,0 +1,458 @@
+@import "tailwindcss";
+
+@import "@fontsource-variable/vazirmatn";
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/jetbrains-mono/500.css";
+
+/* ============================================================
+   SHAMSEH FILM — CINEMATIC DESIGN SYSTEM
+   Persian-first · RTL · film-archive editorial language
+   ============================================================ */
+
+@theme {
+  /* palette — deep cinematic blacks, warm paper tones, one crimson accent */
+  --color-ink: #090909; /* primary background */
+  --color-coal: #111111; /* secondary background */
+  --color-soot: #191919; /* elevated surfaces */
+  --color-line: #242424; /* hairline borders */
+  --color-bone: #f4f0e9; /* primary text */
+  --color-ash: #a7a29b; /* secondary text */
+  --color-smoke: #77736e; /* muted text */
+  --color-crimson: #c52b32; /* single accent */
+  --color-ember: #c8794a; /* reserved warm accent (used sparingly) */
+
+  --font-sans: "Vazirmatn Variable", Vazirmatn, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* fluid editorial type scale */
+  --text-display: clamp(2.75rem, 9vw, 8.5rem);
+  --text-display--line-height: 0.98;
+  --text-display-lg: clamp(3.25rem, 12vw, 11rem);
+  --text-display-lg--line-height: 0.95;
+  --text-h1: clamp(2.1rem, 5.5vw, 4.5rem);
+  --text-h1--line-height: 1.05;
+  --text-h2: clamp(1.6rem, 3.6vw, 2.9rem);
+  --text-h2--line-height: 1.15;
+  --text-h3: clamp(1.25rem, 2.4vw, 1.8rem);
+  --text-h3--line-height: 1.25;
+
+  /* motion */
+  --ease-cine: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* container */
+  --spacing-gutter: clamp(1.25rem, 4vw, 4rem);
+}
+
+/* ---------- base ---------- */
+
+html {
+  background: var(--color-ink);
+  scroll-behavior: auto; /* lenis handles smoothing */
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-ink);
+  color: var(--color-bone);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  min-height: 100dvh;
+}
+
+::selection {
+  background: var(--color-crimson);
+  color: var(--color-bone);
+}
+
+/* focus — visible, cinematic */
+:focus-visible {
+  outline: 1px solid var(--color-crimson);
+  outline-offset: 3px;
+}
+
+/* thin scrollbar in dark */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-ink);
+}
+::-webkit-scrollbar-thumb {
+  background: #2a2a2a;
+  border-radius: 0;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-crimson);
+}
+
+img {
+  -webkit-user-drag: none;
+}
+
+/* ---------- cinematic utilities ---------- */
+
+/* film-grain overlay: cheap SVG turbulence, GPU-composited */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: -100%;
+  z-index: 90;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  opacity: 0.05;
+  animation: grain-shift 0.9s steps(4) infinite;
+  will-change: transform;
+}
+
+@keyframes grain-shift {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-2%, 3%); }
+  50% { transform: translate(3%, -2%); }
+  75% { transform: translate(-3%, -3%); }
+  100% { transform: translate(2%, 2%); }
+}
+
+/* timecode / frame meta labels — LATIN ONLY (mono, ltr, tracked) */
+.tc {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  direction: ltr;
+  unicode-bidi: isolate;
+  color: var(--color-smoke);
+}
+
+.tc-bone { color: var(--color-bone); }
+.tc-crimson { color: var(--color-crimson); }
+
+/* persian meta label — Vazirmatn, natural RTL, no tracking (keeps joining) */
+.tfa {
+  font-size: 0.75rem;
+  color: var(--color-smoke);
+}
+
+/* editorial section label: persian primary + latin code secondary */
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  color: var(--color-smoke);
+  font-size: 0.82rem;
+}
+.kicker::before {
+  content: "";
+  width: 2.25rem;
+  height: 1px;
+  background: var(--color-crimson);
+  flex: none;
+}
+.kicker .tc {
+  font-size: 0.5625rem;
+  letter-spacing: 0.18em;
+}
+
+/* frame corner marks */
+.frame-marks {
+  position: relative;
+}
+.frame-marks::before,
+.frame-marks::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: var(--color-ash);
+  border-style: solid;
+  opacity: 0.55;
+  pointer-events: none;
+  z-index: 2;
+}
+.frame-marks::before {
+  top: 10px;
+  left: 10px;
+  border-width: 1px 0 0 1px;
+}
+.frame-marks::after {
+  bottom: 10px;
+  right: 10px;
+  border-width: 0 1px 1px 0;
+}
+
+/* animated underline link */
+.u-link {
+  position: relative;
+  display: inline-block;
+}
+.u-link::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  right: 0;
+  height: 1px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s var(--ease-cine);
+}
+.u-link:hover::after,
+.u-link:focus-visible::after,
+.u-link[aria-current="page"]::after {
+  transform: scaleX(1);
+  transform-origin: right;
+}
+
+/* primary button — restrained crimson */
+.btn-cine {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.85rem 1.9rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--color-bone);
+  background: transparent;
+  border: 1px solid var(--color-line);
+  border-color: color-mix(in srgb, var(--color-bone) 28%, transparent);
+  overflow: hidden;
+  transition: border-color 0.35s var(--ease-cine), color 0.35s var(--ease-cine);
+  isolation: isolate;
+}
+.btn-cine::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-crimson);
+  transform: translateY(101%);
+  transition: transform 0.45s var(--ease-cine);
+  z-index: -1;
+}
+.btn-cine:hover,
+.btn-cine:focus-visible {
+  border-color: var(--color-crimson);
+  color: var(--color-bone);
+}
+.btn-cine:hover::before,
+.btn-cine:focus-visible::before {
+  transform: translateY(0);
+}
+
+/* ghost/secondary button */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.5rem;
+  font-size: 0.9rem;
+  color: var(--color-ash);
+  border: 1px solid transparent;
+  transition: color 0.3s, border-color 0.3s;
+}
+.btn-ghost:hover {
+  color: var(--color-bone);
+  border-color: var(--color-line);
+}
+
+/* image treatment: deep black lift + slight contrast */
+.img-cine {
+  filter: brightness(0.92) contrast(1.06) saturate(0.92);
+  transition: filter 0.6s var(--ease-cine), transform 0.9s var(--ease-cine);
+  will-change: transform;
+}
+.group:hover .img-cine {
+  filter: brightness(1) contrast(1.04) saturate(1);
+}
+
+/* reveal primitives (JS sets initial states; these are no-JS fallbacks) */
+.js .rv {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+/* rtl-safe directional helpers */
+.dir-ltr {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* marquee strip */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 40s linear infinite;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+[dir="rtl"] .marquee-track {
+  animation-name: marquee-rtl;
+}
+@keyframes marquee-rtl {
+  from { transform: translateX(0); }
+  to { transform: translateX(50%); }
+}
+
+/* scroll indicator line */
+.scroll-line {
+  position: relative;
+  width: 1px;
+  height: 56px;
+  background: color-mix(in srgb, var(--color-bone) 18%, transparent);
+  overflow: hidden;
+}
+.scroll-line::after {
+  content: "";
+  position: absolute;
+  top: -40%;
+  left: 0;
+  width: 100%;
+  height: 40%;
+  background: var(--color-bone);
+  animation: scroll-drop 2.2s var(--ease-cine) infinite;
+}
+@keyframes scroll-drop {
+  0% { top: -40%; }
+  60%, 100% { top: 110%; }
+}
+
+/* lightbox / modal backdrop */
+.veil {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  background: color-mix(in srgb, #050505 88%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* horizontal hairline divider */
+.hairline {
+  border-color: var(--color-line);
+}
+
+/* article body — persian reading rhythm */
+.article-body p {
+  margin-bottom: 1.35em;
+  line-height: 2.05;
+  color: color-mix(in srgb, var(--color-bone) 88%, transparent);
+  text-align: justify;
+  text-justify: inter-word;
+}
+@media (min-width: 768px) {
+  .article-body p {
+    line-height: 2.15;
+  }
+}
+
+/* reduced motion — calm everything */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001s !important;
+  }
+  .grain::after {
+    animation: none;
+  }
+  .marquee-track {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* hide scrollbar for snap rows */
+.no-bar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-bar::-webkit-scrollbar {
+  display: none;
+}
+
+/* snap row for touch carousels */
+.snap-row {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.snap-row::-webkit-scrollbar {
+  display: none;
+}
+.snap-row > * {
+  scroll-snap-align: start;
+  flex: none;
+}
+
+/* sticky header surface states */
+#site-header {
+  transition: background-color 0.45s var(--ease-cine), border-color 0.45s var(--ease-cine),
+    backdrop-filter 0.45s var(--ease-cine);
+  border-bottom: 1px solid transparent;
+}
+#site-header.is-scrolled {
+  background: color-mix(in srgb, var(--color-ink) 82%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom-color: var(--color-line);
+}
+
+/* page transition curtain */
+#curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: #050505;
+  transform: translateY(100%);
+  pointer-events: none;
+  display: grid;
+  place-items: center;
+}
+
+/* custom cursor (desktop pointer:fine only) */
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 300;
+  pointer-events: none;
+  border-radius: 9999px;
+  transform: translate(-50%, -50%);
+}
+.cursor-dot {
+  width: 5px;
+  height: 5px;
+  background: var(--color-crimson);
+}
+.cursor-ring {
+  width: 34px;
+  height: 34px;
+  border: 1px solid color-mix(in srgb, var(--color-bone) 45%, transparent);
+  transition: width 0.25s var(--ease-cine), height 0.25s var(--ease-cine),
+    border-color 0.25s var(--ease-cine), background-color 0.25s var(--ease-cine);
+}
+.cursor-ring.is-active {
+  width: 64px;
+  height: 64px;
+  border-color: var(--color-crimson);
+  background: color-mix(in srgb, var(--color-crimson) 12%, transparent);
+}
+@media (hover: none), (pointer: coarse) {
+  .cursor-dot,
+  .cursor-ring {
+    display: none;
+  }
+}
