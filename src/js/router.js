@@ -104,5 +104,3 @@ export function startRouter() {
   // initial render
   navigate(location.pathname, { replace: true, instant: true });
 }
-
-export const currentRoute = () => currentPath;

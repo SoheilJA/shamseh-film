@@ -3,11 +3,11 @@
  * hero → selected works → about → categories → news → gallery → closing
  */
 import { company } from "../data/company.js";
-import { productions, featured, CATEGORIES, byCategory } from "../data/productions.js";
+import { productions, featured, byCategory } from "../data/productions.js";
 import { news } from "../data/news.js";
 import { gallerySets, allImages } from "../data/gallery.js";
 import { esc, toFaDigits, faDate, renderIcons } from "../js/utils.js";
-import { reveal, imageReveals, parallax, titleIn, sectionHeaderIn, gsap, prefersReduced } from "../js/animator.js";
+import { reveal, imageReveals, parallax, sectionHeaderIn, gsap, prefersReduced } from "../js/animator.js";
 import { productionCard } from "../components/ProductionCard.js";
 import { openLightbox } from "../components/Lightbox.js";
 

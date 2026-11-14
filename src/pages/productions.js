@@ -4,7 +4,7 @@
  */
 import { productions, CATEGORIES, byCategory } from "../data/productions.js";
 import { toFaDigits, renderIcons, debounce } from "../js/utils.js";
-import { reveal, sectionHeaderIn, staggerIn, gsap, prefersReduced } from "../js/animator.js";
+import { reveal, sectionHeaderIn, gsap, prefersReduced } from "../js/animator.js";
 import { productionCard } from "../components/ProductionCard.js";
 
 const TC_OF = {

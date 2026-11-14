@@ -4,7 +4,7 @@
  */
 import { productions, bySlug, byCategory } from "../data/productions.js";
 import { esc, toFaDigits, faDate, renderIcons } from "../js/utils.js";
-import { reveal, imageReveals, parallax, sectionHeaderIn, titleIn, gsap, prefersReduced } from "../js/animator.js";
+import { reveal, imageReveals, parallax, sectionHeaderIn, gsap, prefersReduced } from "../js/animator.js";
 import { productionCard } from "../components/ProductionCard.js";
 import { openVideoModal } from "../components/VideoModal.js";
 import { openLightbox } from "../components/Lightbox.js";

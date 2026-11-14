@@ -2,8 +2,6 @@
  * Header.js — adaptive site chrome: transparent over hero, solid after scroll.
  * Desktop: inline nav + productions dropdown + search.
  */
-import { go } from "../js/utils.js";
-
 const NAV = [
   { href: "/", label: "خانه", exact: true },
   { href: "/productions", label: "تولیدات", dropdown: true },

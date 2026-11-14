@@ -40,7 +40,6 @@ export default async function newsPage(app) {
   const list = app.querySelector("#news-list");
   const empty = app.querySelector("#news-empty");
   const input = app.querySelector("#news-search");
-  const status = () => {};
 
   const norm = (s) => String(s).replace(/[\u200c]/g, " ").replace(/\s+/g, " ").trim();
 

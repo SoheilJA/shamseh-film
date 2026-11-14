@@ -36,13 +36,6 @@ export function scrollToTop(immediate = true) {
   else window.scrollTo({ top: 0, behavior: immediate ? "auto" : "smooth" });
 }
 
-export function scrollToEl(target, offset = -80) {
-  const elx = typeof target === "string" ? document.querySelector(target) : target;
-  if (!elx) return;
-  if (lenis) lenis.scrollTo(elx, { offset, duration: 1.2 });
-  else elx.scrollIntoView({ behavior: "smooth" });
-}
-
 export function stopScroll() {
   lenis?.stop();
   document.documentElement.style.overflow = "hidden";
@@ -154,19 +147,6 @@ export function parallax(root = document) {
         },
       }
     );
-  });
-}
-
-/** staggered children entrance for grids/lists */
-export function staggerIn(container, selector = "> *", vars = {}) {
-  if (prefersReduced()) return;
-  gsap.from(container.querySelectorAll(selector), {
-    y: 30,
-    opacity: 0,
-    duration: 0.85,
-    ease: "power3.out",
-    stagger: 0.07,
-    ...vars,
   });
 }
 

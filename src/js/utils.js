@@ -51,13 +51,6 @@ export function faDate(iso) {
   return `${toFaDigits(jd)} ${J_MONTHS[jm - 1]} ${toFaDigits(jy)}`;
 }
 
-/** ISO date → compact "۱۴۰۰/۱۰/۱۶" */
-export function faDateShort(iso) {
-  const [y, m, d] = iso.slice(0, 10).split("-").map(Number);
-  const [jy, jm, jd] = toJalali(y, m, d);
-  return `${toFaDigits(jy)}/${toFaDigits(jm)}/${toFaDigits(jd)}`;
-}
-
 /* ---------- DOM helpers ---------- */
 
 export const el = (html) => {
@@ -76,8 +69,6 @@ export const debounce = (fn, ms = 200) => {
     t = setTimeout(() => fn(...args), ms);
   };
 };
-
-export const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
 
 /** render lucide icons inside a root after page mount */
 export function renderIcons(root = document) {
@@ -106,9 +97,6 @@ export function renderIcons(root = document) {
     });
   });
 }
-
-/** click-safe internal link helper — returns anchor string for router */
-export const go = (path) => path;
 
 /** escape html for user/data-provided strings injected into templates */
 export function esc(s) {

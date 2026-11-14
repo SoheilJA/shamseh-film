@@ -1,7 +1,7 @@
 /**
  * SearchOverlay.js — full-screen cinematic search across productions + news.
  */
-import { productions, CATEGORIES } from "../data/productions.js";
+import { productions } from "../data/productions.js";
 import { news } from "../data/news.js";
 import { esc, faDate } from "../js/utils.js";
 

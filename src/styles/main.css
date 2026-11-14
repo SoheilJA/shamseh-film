@@ -268,18 +268,6 @@ img {
   filter: brightness(1) contrast(1.04) saturate(1);
 }
 
-/* reveal primitives (JS sets initial states; these are no-JS fallbacks) */
-.js .rv {
-  opacity: 0;
-  transform: translateY(28px);
-}
-
-/* rtl-safe directional helpers */
-.dir-ltr {
-  direction: ltr;
-  unicode-bidi: isolate;
-}
-
 /* marquee strip */
 .marquee-track {
   display: flex;
@@ -331,11 +319,6 @@ img {
   -webkit-backdrop-filter: blur(10px);
 }
 
-/* horizontal hairline divider */
-.hairline {
-  border-color: var(--color-line);
-}
-
 /* article body — persian reading rhythm */
 .article-body p {
   margin-bottom: 1.35em;
@@ -368,15 +351,6 @@ img {
   html {
     scroll-behavior: auto;
   }
-}
-
-/* hide scrollbar for snap rows */
-.no-bar {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-.no-bar::-webkit-scrollbar {
-  display: none;
 }
 
 /* snap row for touch carousels */
