@@ -1,4 +1,5 @@
 // AUTO-GENERATED from shamsehfilm.ir content research — do not edit by hand
+import { withBaseDeep } from "../js/base.js";
 export const productions = [
   {
     "id": "chale",
@@ -5475,3 +5476,5 @@ export const featured = [
   'ali-madad', 'mahi-parande', 'mowkab-ol-reza', 'refaghat-hitech',
   'dadnegar', 'madar-estesnaei', 'khancheh', 'ashouraiyan', 'hame-ba-ham',
 ].map((id) => bySlug(id)).filter(Boolean)
+
+withBaseDeep(productions);

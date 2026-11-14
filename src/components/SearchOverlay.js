@@ -4,6 +4,7 @@
 import { productions } from "../data/productions.js";
 import { news } from "../data/news.js";
 import { esc, faDate } from "../js/utils.js";
+import { withBase } from "../js/base.js";
 
 const norm = (s) =>
   String(s).replace(/[\u200c\u200f]/g, " ").replace(/\s+/g, " ").trim();
@@ -119,7 +120,7 @@ export function initSearchOverlay() {
         html += prodHits
           .map((p) =>
             resultItem({
-              href: `/productions/${p.id}`,
+              href: withBase(`/productions/${p.id}`),
               kicker: "FILM",
               title: p.title,
               meta: p.categoryFa,
@@ -132,7 +133,7 @@ export function initSearchOverlay() {
         html += newsHits
           .map((n) =>
             resultItem({
-              href: `/news/${n.id}`,
+              href: withBase(`/news/${n.id}`),
               kicker: "NEWS",
               title: n.title,
               meta: faDate(n.date),

@@ -1,4 +1,5 @@
 // AUTO-GENERATED from shamsehfilm.ir content research — do not edit by hand
+import { withBaseDeep } from "../js/base.js";
 export const company = {
   "nameFa": "گروه سینمایی شمسه فیلم",
   "nameEn": "SHAMSEH FILM",
@@ -70,3 +71,5 @@ export const company = {
     }
   ]
 }
+
+withBaseDeep(company);

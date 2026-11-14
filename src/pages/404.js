@@ -2,6 +2,7 @@
  * 404.js — lost frame.
  */
 import { renderIcons } from "../js/utils.js";
+import { withBase } from "../js/base.js";
 
 export default async function notFoundPage(app) {
   app.innerHTML = `
@@ -13,8 +14,8 @@ export default async function notFoundPage(app) {
         صفحه‌ای که دنبال آن بودید در آرشیو موجود نیست؛ شاید نشانی را اشتباه وارد کرده‌اید یا این صفحه جابه‌جا شده است.
       </p>
       <div class="flex flex-wrap items-center justify-center gap-4">
-        <a href="/" class="btn-cine">بازگشت به خانه <i data-lucide="arrow-left" data-size="16"></i></a>
-        <a href="/productions" class="btn-ghost">مرور آرشیو تولیدات</a>
+        <a href="${withBase("/")}" class="btn-cine">بازگشت به خانه <i data-lucide="arrow-left" data-size="16"></i></a>
+        <a href="${withBase("/productions")}" class="btn-ghost">مرور آرشیو تولیدات</a>
       </div>
     </div>
   </main>`;

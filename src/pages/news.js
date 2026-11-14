@@ -1,9 +1,10 @@
-/**
+﻿/**
  * news.js — editorial news archive with search.
  */
 import { news } from "../data/news.js";
 import { esc, toFaDigits, faDate, renderIcons, debounce } from "../js/utils.js";
 import { reveal, sectionHeaderIn, gsap, prefersReduced } from "../js/animator.js";
+import { withBase } from "../js/base.js";
 
 export default async function newsPage(app) {
   let searchTerm = "";
@@ -57,7 +58,7 @@ export default async function newsPage(app) {
       .map((n, i) => {
         const lead = i === 0 && !searchTerm;
         return `
-      <a href="/news/${n.id}" class="group grid grid-cols-1 ${lead ? "md:grid-cols-12" : "sm:grid-cols-[220px_1fr] md:grid-cols-[280px_1fr]"} gap-5 md:gap-8 py-7 md:py-9 border-b border-line hover:bg-soot/40 transition-colors duration-500 px-2 md:px-4 -mx-2 md:-mx-4">
+      <a href="${withBase(`/news/${n.id}`)}" class="group grid grid-cols-1 ${lead ? "md:grid-cols-12" : "sm:grid-cols-[220px_1fr] md:grid-cols-[280px_1fr]"} gap-5 md:gap-8 py-7 md:py-9 border-b border-line hover:bg-soot/40 transition-colors duration-500 px-2 md:px-4 -mx-2 md:-mx-4">
         <div class="relative overflow-hidden ${lead ? "md:col-span-5 aspect-[16/9]" : "aspect-[16/10]"} bg-soot">
           ${
             n.image

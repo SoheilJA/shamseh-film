@@ -3,6 +3,7 @@
  * Routes render into #app between persistent header/footer chrome.
  */
 import { qs } from "./utils.js";
+import { stripBase, withBase } from "./base.js";
 import { gsap, cleanupPage, scrollToTop, startScroll } from "./animator.js";
 
 const routes = [];
@@ -31,6 +32,10 @@ function match(path) {
 
 /** all internal navigation funnels here */
 export async function navigate(path, { replace = false, instant = false } = {}) {
+  // split query string off; routes match on pathname only
+  const qIndex = path.indexOf("?");
+  const query = qIndex >= 0 ? path.slice(qIndex) : "";
+  path = qIndex >= 0 ? path.slice(0, qIndex) : path;
   if (transitioning) return;
   if (path === currentPath) {
     scrollToTop();
@@ -46,7 +51,8 @@ export async function navigate(path, { replace = false, instant = false } = {}) 
     document.dispatchEvent(new CustomEvent("page:leave"));
 
     const found = match(path) || match("/404") || { page: null, params: {} };
-    window.history[replace ? "replaceState" : "pushState"]({}, "", path);
+    const href = withBase(path) + query;
+    window.history[replace ? "replaceState" : "pushState"]({}, "", href);
     currentPath = path;
 
     if (found.page) {
@@ -94,13 +100,13 @@ export function startRouter() {
     if (!href || a.target === "_blank" || a.hasAttribute("download") || a.dataset.external !== undefined) return;
     if (href.startsWith("http") || href.startsWith("mailto:") || href.startsWith("tel:") || href.startsWith("#")) return;
     e.preventDefault();
-    navigate(href);
+    navigate(stripBase(new URL(href, location.href).pathname) + new URL(href, location.href).search);
   });
 
   window.addEventListener("popstate", () => {
-    navigate(location.pathname, { replace: true });
+    navigate(stripBase(location.pathname) + location.search, { replace: true });
   });
 
   // initial render
-  navigate(location.pathname, { replace: true, instant: true });
+  navigate(stripBase(location.pathname) + location.search, { replace: true, instant: true });
 }

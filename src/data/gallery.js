@@ -1,4 +1,5 @@
 // AUTO-GENERATED from shamsehfilm.ir content research — do not edit by hand
+import { withBaseDeep } from "../js/base.js";
 export const gallerySets = [
   {
     "id": "گالری تصاویر نماهنگ تار و پود",
@@ -295,6 +296,8 @@ export const gallerySets = [
     ]
   }
 ]
+
+withBaseDeep(gallerySets);
 
 export const allImages = gallerySets.flatMap((set) =>
   set.images.map((img, i) => ({ ...img, set: set.title, productionSlug: set.productionSlug, index: i }))

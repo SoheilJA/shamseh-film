@@ -1,6 +1,7 @@
 /**
  * Shared utilities — Persian dates, DOM helpers, lucide icons.
  */
+export { withBase as asset } from "./base.js";
 
 const FA_DIGITS = "۰۱۲۳۴۵۶۷۸۹";
 

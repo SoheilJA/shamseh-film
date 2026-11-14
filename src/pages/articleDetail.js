@@ -1,4 +1,4 @@
-/**
+﻿/**
  * articleDetail.js — full editorial article page: headline, date, hero image,
  * complete original content, share links, related news, prev/next.
  */
@@ -6,6 +6,7 @@ import { news, bySlug } from "../data/news.js";
 import { esc, toFaDigits, faDate, renderIcons } from "../js/utils.js";
 import { reveal, sectionHeaderIn, parallax, gsap, prefersReduced } from "../js/animator.js";
 import notFoundPage from "./404.js";
+import { withBase } from "../js/base.js";
 
 export default async function articleDetailPage(app, params) {
   const n = bySlug(params.slug);
@@ -83,7 +84,7 @@ export default async function articleDetailPage(app, params) {
           ${related
             .map(
               (r) => `
-          <a href="/news/${r.id}" class="group grid grid-cols-[160px_1fr] gap-4 items-center border border-line hover:border-crimson/60 bg-soot/30 transition-colors duration-500 p-3">
+          <a href="${withBase(`/news/${r.id}`)}" class="group grid grid-cols-[160px_1fr] gap-4 items-center border border-line hover:border-crimson/60 bg-soot/30 transition-colors duration-500 p-3">
             <div class="relative overflow-hidden aspect-[4/3] bg-soot">
               ${
                 r.image
@@ -107,11 +108,11 @@ export default async function articleDetailPage(app, params) {
 
     <!-- prev/next -->
     <nav class="border-t border-line grid grid-cols-2" aria-label="پیمایش بین اخبار">
-      <a href="/news/${prev.id}" class="group py-8 md:py-12 px-[var(--spacing-gutter)] border-l border-line hover:bg-soot transition-colors duration-500">
+      <a href="${withBase(`/news/${prev.id}`)}" class="group py-8 md:py-12 px-[var(--spacing-gutter)] border-l border-line hover:bg-soot transition-colors duration-500">
         <p class="tc tc-crimson mb-2 flex items-center gap-2"><i data-lucide="arrow-right" data-size="14"></i> PREV</p>
         <p class="font-bold text-ash group-hover:text-bone transition-colors line-clamp-1">${esc(prev.title)}</p>
       </a>
-      <a href="/news/${next.id}" class="group py-8 md:py-12 px-[var(--spacing-gutter)] hover:bg-soot transition-colors duration-500 text-end">
+      <a href="${withBase(`/news/${next.id}`)}" class="group py-8 md:py-12 px-[var(--spacing-gutter)] hover:bg-soot transition-colors duration-500 text-end">
         <p class="tc tc-crimson mb-2 flex items-center gap-2 justify-end">NEXT <i data-lucide="arrow-left" data-size="14"></i></p>
         <p class="font-bold text-ash group-hover:text-bone transition-colors line-clamp-1">${esc(next.title)}</p>
       </a>

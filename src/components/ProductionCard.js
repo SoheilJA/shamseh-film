@@ -4,13 +4,14 @@
  * Typographic fallback for productions without imagery.
  */
 import { esc, toFaDigits } from "../js/utils.js";
+import { withBase } from "../js/base.js";
 
 export function productionCard(p, { variant = "portrait", index = 0, ratio = "3/4" } = {}) {
   const num = String(index + 1).padStart(2, "0");
   const image = variant === "portrait" ? p.poster || p.hero : p.hero || p.poster;
 
   return `
-  <a href="/productions/${p.id}" data-card class="group relative block" aria-label="${esc(p.title)}">
+  <a href="${withBase(`/productions/${p.id}`)}" data-card class="group relative block" aria-label="${esc(p.title)}">
     <div class="relative overflow-hidden bg-soot frame-marks" style="aspect-ratio:${ratio}">
 
       <!-- SC label inside the frame, no collisions -->

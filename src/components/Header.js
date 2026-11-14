@@ -2,6 +2,8 @@
  * Header.js — adaptive site chrome: transparent over hero, solid after scroll.
  * Desktop: inline nav + productions dropdown + search.
  */
+import { withBase } from "../js/base.js";
+
 const NAV = [
   { href: "/", label: "خانه", exact: true },
   { href: "/productions", label: "تولیدات", dropdown: true },
@@ -23,7 +25,7 @@ export function headerHTML() {
   return `
   <header id="site-header" class="fixed inset-x-0 top-0 z-[100]">
     <div class="flex items-center justify-between gap-4 px-[var(--spacing-gutter)] h-16 md:h-20">
-      <a href="/" class="group flex items-center gap-3" aria-label="شمسه فیلم — صفحه اصلی">
+      <a href="${withBase("/")}" class="group flex items-center gap-3" aria-label="شمسه فیلم — صفحه اصلی">
         <span class="inline-block w-2 h-2 bg-crimson group-hover:rotate-45 transition-transform duration-500"></span>
         <span class="leading-none">
           <span class="block text-[1.05rem] md:text-xl font-bold tracking-tight">شمسه فیلم</span>
@@ -35,7 +37,7 @@ export function headerHTML() {
         ${NAV.map(
           (n) => `
         <div class="relative group/nav" ${n.dropdown ? 'data-dropdown' : ""}>
-          <a href="${n.href}" data-nav-link="${n.href}"
+          <a href="${withBase(n.href)}" data-nav-link="${n.href}"
              class="u-link text-[.95rem] text-ash hover:text-bone transition-colors duration-300 py-2">
             ${n.label}
           </a>
@@ -45,7 +47,7 @@ export function headerHTML() {
               <div class="min-w-56 border border-line bg-ink/95 backdrop-blur-xl py-2">
                 ${DROPDOWN.map(
                   (d) => `
-                <a href="${d.href}" class="flex items-center justify-between gap-6 px-5 py-2.5 text-sm text-ash hover:text-bone hover:bg-soot transition-colors">
+                <a href="${withBase(d.href)}" class="flex items-center justify-between gap-6 px-5 py-2.5 text-sm text-ash hover:text-bone hover:bg-soot transition-colors">
                   <span>${d.label}</span>
                   <span class="tc" style="font-size:.55rem">${d.tc}</span>
                 </a>`
@@ -63,7 +65,7 @@ export function headerHTML() {
           class="flex items-center justify-center w-10 h-10 text-ash hover:text-bone transition-colors">
           <i data-lucide="search" data-size="19"></i>
         </button>
-        <a href="/contact" class="hidden md:inline-flex btn-cine !py-2.5 !px-5 text-sm">شروع همکاری</a>
+        <a href="${withBase("/contact")}" class="hidden md:inline-flex btn-cine !py-2.5 !px-5 text-sm">شروع همکاری</a>
         <button type="button" data-menu-open class="lg:hidden flex flex-col justify-center gap-[5px] w-10 h-10" aria-label="باز کردن منو" aria-expanded="false">
           <span class="menu-line block w-6 h-px bg-bone transition-transform duration-300"></span>
           <span class="menu-line block w-6 h-px bg-bone transition-opacity duration-300"></span>

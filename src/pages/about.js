@@ -1,4 +1,4 @@
-/**
+﻿/**
  * about.js — company identity page. Built strictly from verifiable source
  * content: production history from the archive, original logo, real credits.
  */
@@ -6,6 +6,7 @@ import { company } from "../data/company.js";
 import { productions, byCategory, CATEGORIES } from "../data/productions.js";
 import { toFaDigits, renderIcons, esc } from "../js/utils.js";
 import { reveal, imageReveals, parallax, sectionHeaderIn } from "../js/animator.js";
+import { withBase } from "../js/base.js";
 
 const DIRECTORS = {};
 productions.forEach((p) =>
@@ -36,7 +37,7 @@ export default async function aboutPage(app) {
       <div class="lg:col-span-5 order-2 lg:order-1">
         <div class="relative overflow-hidden frame-marks bg-soot" data-img-reveal>
           <div class="aspect-[4/3] grid place-items-center p-10">
-            <img src="/assets/images/logo-lg.webp" alt="نشان گروه سینمایی شمسه فیلم" loading="lazy"
+            <img src="${withBase("/assets/images/logo-lg.webp")}" alt="نشان گروه سینمایی شمسه فیلم" loading="lazy"
                  class="max-w-full max-h-full object-contain" />
           </div>
         </div>
@@ -74,7 +75,7 @@ export default async function aboutPage(app) {
         <h2 class="text-h2 font-black mb-12" data-section-title>چهار خط تولید</h2>
         <div class="grid gap-px bg-line sm:grid-cols-2 lg:grid-cols-4">
           ${CATEGORIES.filter(c => c.key !== "all").map((c, i) => `
-          <a href="/productions?cat=${c.key}" class="group bg-coal hover:bg-soot transition-colors duration-500 p-7 md:p-9 flex flex-col justify-between min-h-48">
+          <a href="${withBase(`/productions?cat=${c.key}`)}" class="group bg-coal hover:bg-soot transition-colors duration-500 p-7 md:p-9 flex flex-col justify-between min-h-48">
             <p class="tc tc-crimson">0${toFaDigits(i + 1)} · ${toFaDigits(byCategory(c.key).length)} اثر</p>
             <div class="mt-10">
               <h3 class="text-h3 font-black mb-3">${c.fa}</h3>
@@ -126,7 +127,7 @@ export default async function aboutPage(app) {
             ${company.address}
           </address>
           <div class="mt-8 flex flex-wrap gap-4">
-            <a href="/contact" class="btn-cine">صفحه ارتباط با ما <i data-lucide="arrow-left" data-size="16"></i></a>
+            <a href="${withBase("/contact")}" class="btn-cine">صفحه ارتباط با ما <i data-lucide="arrow-left" data-size="16"></i></a>
             <a href="${company.phoneHref}" class="btn-ghost" dir="ltr">${company.phone}</a>
           </div>
         </div>

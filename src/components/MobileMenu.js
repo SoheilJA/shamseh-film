@@ -3,6 +3,7 @@
  * Staggered entrance, production categories, contact info, socials.
  */
 import { company } from "../data/company.js";
+import { withBase } from "../js/base.js";
 
 export function mobileMenuHTML() {
   const links = [
@@ -37,7 +38,7 @@ export function mobileMenuHTML() {
             .map(
               (l) => `
           <li class="mm-item opacity-0">
-            <a href="${l.href}" class="group flex items-baseline gap-4 py-3 border-b border-line/60">
+            <a href="${withBase(l.href)}" class="group flex items-baseline gap-4 py-3 border-b border-line/60">
               <span class="tc tc-crimson">${l.tc}</span>
               <span class="text-2xl font-bold group-hover:text-crimson group-active:text-crimson transition-colors">${l.label}</span>
             </a>
@@ -51,7 +52,7 @@ export function mobileMenuHTML() {
           ${cats
             .map(
               (c) => `
-          <a href="${c.href}" class="border border-line px-4 py-2 text-sm text-ash hover:text-bone hover:border-crimson transition-colors">${c.label}</a>`
+          <a href="${withBase(c.href)}" class="border border-line px-4 py-2 text-sm text-ash hover:text-bone hover:border-crimson transition-colors">${c.label}</a>`
             )
             .join("")}
         </div>

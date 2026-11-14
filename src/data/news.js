@@ -1,4 +1,5 @@
 // AUTO-GENERATED from shamsehfilm.ir content research — do not edit by hand
+import { withBaseDeep } from "../js/base.js";
 export const news = [
   {
     "id": "gharib-gharib-aria-aziminejad",
@@ -216,3 +217,5 @@ export const news = [
 ]
 
 export const bySlug = (slug) => news.find((n) => n.id === slug)
+
+withBaseDeep(news);

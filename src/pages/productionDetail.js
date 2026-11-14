@@ -1,4 +1,4 @@
-/**
+﻿/**
  * productionDetail.js — cinematic editorial page for a single production:
  * hero → meta → description → videos (Aparat) → credits → gallery → related → prev/next
  */
@@ -9,6 +9,7 @@ import { productionCard } from "../components/ProductionCard.js";
 import { openVideoModal } from "../components/VideoModal.js";
 import { openLightbox } from "../components/Lightbox.js";
 import notFoundPage from "./404.js";
+import { withBase } from "../js/base.js";
 
 export default async function productionDetailPage(app, params) {
   const p = bySlug(params.slug);
@@ -181,7 +182,7 @@ export default async function productionDetailPage(app, params) {
             <p class="kicker mb-5" data-kicker>آثار مرتبط <span class="tc">RELATED</span></p>
             <h2 class="text-h2 font-black" data-section-title>از همان دسته</h2>
           </div>
-          <a href="/productions?cat=${p.category}" class="u-link tc tc-bone hover:text-crimson transition-colors pb-2">MORE →</a>
+          <a href="${withBase(`/productions?cat=${p.category}`)}" class="u-link tc tc-bone hover:text-crimson transition-colors pb-2">MORE →</a>
         </div>
         <div class="grid gap-5 md:gap-6 sm:grid-cols-2 lg:grid-cols-3">
           ${related.map((r, i) => productionCard(r, { variant: "portrait", index: i })).join("")}
@@ -193,11 +194,11 @@ export default async function productionDetailPage(app, params) {
 
     <!-- ============ PREV / NEXT ============ -->
     <nav class="border-t border-line grid grid-cols-2" aria-label="پیمایش بین آثار">
-      <a href="/productions/${prev.id}" class="group relative py-10 md:py-16 px-[var(--spacing-gutter)] border-l border-line hover:bg-soot transition-colors duration-500">
+      <a href="${withBase(`/productions/${prev.id}`)}" class="group relative py-10 md:py-16 px-[var(--spacing-gutter)] border-l border-line hover:bg-soot transition-colors duration-500">
         <p class="tc tc-crimson mb-3 flex items-center gap-2"><i data-lucide="arrow-right" data-size="14"></i> PREV · اثر پیشین</p>
         <p class="font-bold text-lg md:text-2xl text-ash group-hover:text-bone transition-colors">${esc(prev.title)}</p>
       </a>
-      <a href="/productions/${next.id}" class="group relative py-10 md:py-16 px-[var(--spacing-gutter)] hover:bg-soot transition-colors duration-500">
+      <a href="${withBase(`/productions/${next.id}`)}" class="group relative py-10 md:py-16 px-[var(--spacing-gutter)] hover:bg-soot transition-colors duration-500">
         <p class="tc tc-crimson mb-3 flex items-center gap-2 justify-end">NEXT · اثر بعدی <i data-lucide="arrow-left" data-size="14"></i></p>
         <p class="font-bold text-lg md:text-2xl text-ash group-hover:text-bone transition-colors text-end">${esc(next.title)}</p>
       </a>

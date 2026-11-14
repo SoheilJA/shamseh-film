@@ -1,4 +1,4 @@
-/**
+﻿/**
  * home.js — the cinematic opening:
  * hero → selected works → about → categories → news → gallery → closing
  */
@@ -7,6 +7,7 @@ import { productions, featured, byCategory } from "../data/productions.js";
 import { news } from "../data/news.js";
 import { gallerySets, allImages } from "../data/gallery.js";
 import { esc, toFaDigits, faDate, renderIcons } from "../js/utils.js";
+import { withBase } from "../js/base.js";
 import { reveal, imageReveals, parallax, sectionHeaderIn, gsap, prefersReduced } from "../js/animator.js";
 import { productionCard } from "../components/ProductionCard.js";
 import { openLightbox } from "../components/Lightbox.js";
@@ -86,11 +87,11 @@ export default async function homePage(app) {
             گروه سینمایی شمسه فیلم؛ استودیوی تولید فیلم مستند، داستانی، نماهنگ و برنامه تلویزیونی در مشهد.
           </p>
           <div class="mt-8 md:mt-10 flex flex-wrap items-center gap-4" data-hero-cta>
-            <a href="/productions" class="btn-cine">
+            <a href="${withBase("/productions")}" class="btn-cine">
               ورود به آرشیو تولیدات
               <i data-lucide="arrow-left" data-size="17"></i>
             </a>
-            <a href="/about" class="btn-ghost">آشنایی با شمسه فیلم</a>
+            <a href="${withBase("/about")}" class="btn-ghost">آشنایی با شمسه فیلم</a>
           </div>
         </div>
 
@@ -124,7 +125,7 @@ export default async function homePage(app) {
             <p class="kicker mb-5" data-kicker>تولیدات برگزیده <span class="tc">SELECTED WORKS</span></p>
             <h2 class="text-h1 font-black" data-section-title>آثار انتخابی</h2>
           </div>
-          <a href="/productions" class="u-link tc tc-bone hover:text-crimson transition-colors pb-2">
+          <a href="${withBase("/productions")}" class="u-link tc tc-bone hover:text-crimson transition-colors pb-2">
             VIEW FULL ARCHIVE (${toFaDigits(productions.length)} اثر)
           </a>
         </div>
@@ -157,7 +158,7 @@ export default async function homePage(app) {
         </div>
 
         <div class="mt-10 md:mt-14 text-center">
-          <a href="/productions" class="btn-cine">
+          <a href="${withBase("/productions")}" class="btn-cine">
             مشاهده همه ${toFaDigits(productions.length)} اثر
             <i data-lucide="arrow-left" data-size="17"></i>
           </a>
@@ -210,7 +211,7 @@ export default async function homePage(app) {
               )
               .join("")}
           </div>
-          <a href="/about" class="btn-ghost mt-10 !px-0 hover:!border-transparent">
+          <a href="${withBase("/about")}" class="btn-ghost mt-10 !px-0 hover:!border-transparent">
             متن کامل معرفی
             <i data-lucide="arrow-left" data-size="16"></i>
           </a>
@@ -231,7 +232,7 @@ export default async function homePage(app) {
             const sample = productions.find((p) => p.id === c.img);
             const count = byCategory(c.key).length;
             return `
-          <a href="/productions?cat=${c.key}" class="group relative overflow-hidden bg-soot border border-line" data-cat-card>
+          <a href="${withBase(`/productions?cat=${c.key}`)}" class="group relative overflow-hidden bg-soot border border-line" data-cat-card>
             <div class="relative aspect-[3/4] overflow-hidden">
               ${
                 sample?.hero
@@ -264,7 +265,7 @@ export default async function homePage(app) {
             <p class="kicker mb-5" data-kicker>اخبار و رویدادها <span class="tc">NEWS & EVENTS</span></p>
             <h2 class="text-h1 font-black" data-section-title>از پشت صحنه</h2>
           </div>
-          <a href="/news" class="u-link tc tc-bone hover:text-crimson transition-colors pb-2">
+          <a href="${withBase("/news")}" class="u-link tc tc-bone hover:text-crimson transition-colors pb-2">
             ALL NEWS (${toFaDigits(news.length)})
           </a>
         </div>
@@ -274,7 +275,7 @@ export default async function homePage(app) {
             .map((n, i) => {
               const isLead = i === 0;
               return `
-          <a href="/news/${n.id}" class="group relative bg-coal hover:bg-soot transition-colors duration-500 ${isLead ? "md:col-span-2" : ""}">
+          <a href="${withBase(`/news/${n.id}`)}" class="group relative bg-coal hover:bg-soot transition-colors duration-500 ${isLead ? "md:col-span-2" : ""}">
             <div class="flex flex-col ${isLead ? "md:flex-row" : ""} gap-0">
               ${
                 n.image
@@ -309,7 +310,7 @@ export default async function homePage(app) {
             <p class="kicker mb-5" data-kicker>گالری تصاویر <span class="tc">STILLS</span></p>
             <h2 class="text-h1 font-black" data-section-title>قاب‌های روی پرده</h2>
           </div>
-          <a href="/gallery" class="u-link tc tc-bone hover:text-crimson transition-colors pb-2">
+          <a href="${withBase("/gallery")}" class="u-link tc tc-bone hover:text-crimson transition-colors pb-2">
             OPEN GALLERY (${toFaDigits(allImages.length)} FRAME)
           </a>
         </div>
@@ -346,7 +347,7 @@ export default async function homePage(app) {
           برای همکاری، سفارش تولید یا هر پرسش دیگری با گروه سینمایی شمسه فیلم در تماس باشید.
         </p>
         <div class="flex flex-wrap items-center justify-center gap-4">
-          <a href="/contact" class="btn-cine">
+          <a href="${withBase("/contact")}" class="btn-cine">
             ارتباط با ما
             <i data-lucide="arrow-left" data-size="17"></i>
           </a>

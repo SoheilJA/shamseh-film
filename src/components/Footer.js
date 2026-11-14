@@ -2,6 +2,7 @@
  * Footer.js — the closing sequence: marquee, company block, links, credits.
  */
 import { company } from "../data/company.js";
+import { withBase } from "../js/base.js";
 
 export function footerHTML() {
   const year = "۱۴۰۰–۱۴۰۱";
@@ -62,7 +63,7 @@ export function footerHTML() {
           ]
             .map(
               ([href, label]) => `
-          <li><a href="${href}" class="u-link hover:text-bone transition-colors">${label}</a></li>`
+          <li><a href="${withBase(href)}" class="u-link hover:text-bone transition-colors">${label}</a></li>`
             )
             .join("")}
         </ul>
