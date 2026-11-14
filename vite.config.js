@@ -3,7 +3,8 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [tailwindcss()],
-  base: '/',
+  // GitHub Pages serves the repo under /shamseh-film/ — relative base works everywhere
+  base: './',
   appType: 'spa',
   server: {
     port: 5173,
