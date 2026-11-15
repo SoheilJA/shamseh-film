@@ -3,8 +3,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [tailwindcss()],
-  // Cloudflare Pages: "/" | GitHub Pages: "/shamseh-film/"
-  base: process.env.CF_PAGES ? '/' : '/shamseh-film/',
+  base: '/',
   appType: 'spa',
   server: {
     port: 5173,
